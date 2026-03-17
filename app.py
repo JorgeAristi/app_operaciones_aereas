@@ -60,16 +60,16 @@ st.image('encabezado.png',use_container_width=True)
 st.title('Datos operacionales')
 col1, col2, col3=st.columns(3)
 
+with st.container(border=true)
+    with col1:
 
-with col1:
+        st.metric('Máximo', f'{maximo:.0f}',border=True)
 
-    st.metric('Máximo', f'{maximo:.0f}',border=True)
+    with col2:
+        st.metric('Mínimo', f'{minimo:.0f}',border=True)  
 
-with col2:
-    st.metric('Mínimo', f'{minimo:.0f}',border=True)  
-
-with col3:
-    st.metric('Media', f'{media:.0f}',border=True)
+    with col3:
+        st.metric('Media', f'{media:.0f}',border=True)
 
 with st.expander('Registros 2025 '):
     st.dataframe(df)
@@ -84,36 +84,37 @@ with st.expander('Top 10 de rutas con mayor número de operaciones'):
 
 # Creación de la gráfica
 
-col4,col5=st.columns(2)
+with st.container(border=True):
+    col4,col5=st.columns(2)
 
-with col4:
-    #st.dataframe(df_top5_aeropuerto)
-    fig_barras=px.bar(
-        df_top5_aeropuerto,
-        x='AEROPUERTO_OPERACION',
-        y='count',
-        title='Top 5 aeropuertos con mayor número de operaciones',
-        labels={'AEROPUERTO_OPERACION': 'Aeropuerto',
-                'count': 'Número de operaciones'
-        },
-        color='AEROPUERTO_OPERACION',
-        color_discrete_sequence=paleta_barras
-    )  
-    st.plotly_chart(fig_barras,use_container_width=True) 
-#fig_barras.update_layout(showlegend=False) 
+    with col4:
+        #st.dataframe(df_top5_aeropuerto)
+        fig_barras=px.bar(
+            df_top5_aeropuerto,
+            x='AEROPUERTO_OPERACION',
+            y='count',
+            title='Top 5 aeropuertos con mayor número de operaciones',
+            labels={'AEROPUERTO_OPERACION': 'Aeropuerto',
+                    'count': 'Número de operaciones'
+            },
+            color='AEROPUERTO_OPERACION',
+            color_discrete_sequence=paleta_barras
+        )  
+        st.plotly_chart(fig_barras,use_container_width=True) 
+    #fig_barras.update_layout(showlegend=False) 
 
 
-# st.dataframe(df_top5_aeropuerto)
+    # st.dataframe(df_top5_aeropuerto)
 
-with col5:
-    df_top10_rutas=df_top10_rutas.sort_values('CANTIDAD',ascending=True)
-    fig_rutas=px.bar(
-        df_top10_rutas,
-        x='CANTIDAD',
-        y='RUTA',
-        title='Top 10 de rutas con mayor número de operaciones',
-        color='CANTIDAD',
-        color_continuous_scale='tealgrn'
-    )
-    fig_rutas.update_layout(showlegend=False) 
-    st.plotly_chart(fig_rutas,use_container_width=True)
+    with col5:
+        df_top10_rutas=df_top10_rutas.sort_values('CANTIDAD',ascending=True)
+        fig_rutas=px.bar(
+            df_top10_rutas,
+            x='CANTIDAD',
+            y='RUTA',
+            title='Top 10 de rutas con mayor número de operaciones',
+            color='CANTIDAD',
+            color_continuous_scale='tealgrn'
+        )
+        fig_rutas.update_layout(showlegend=False) 
+        st.plotly_chart(fig_rutas,use_container_width=True)
