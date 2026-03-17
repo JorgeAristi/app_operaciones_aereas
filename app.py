@@ -57,16 +57,18 @@ paleta_barras=px.colors.qualitative.Antique
 
 st.image('encabezado.png',use_container_width=True)
 
-st.title('Datos operacionales')
-col1, col2, col3=st.columns(3)
+#st.title('Datos operacionales')
+
 
 with st.container(border=True):
+    col1, col2, col3=st.columns(3)
     with col1:
         st.metric('Máximo', f'{maximo:.0f}',border=True)
     with col2:
         st.metric('Mínimo', f'{minimo:.0f}',border=True)  
     with col3:
         st.metric('Media', f'{media:.0f}',border=True)
+
 with st.expander('Registros 2025 '):
     st.dataframe(df)
 
@@ -114,3 +116,20 @@ with st.container(border=True):
         )
         fig_rutas.update_layout(showlegend=False) 
         st.plotly_chart(fig_rutas,use_container_width=True)
+
+tab1,tab2=st.tabs(['DATOS','GRÁFICA DE BARRAS'])
+
+with tab1:
+    st.dataframe(df_top10_rutas)
+with tab2:
+    df_top10_rutas=df_top10_rutas.sort_values('CANTIDAD',ascending=True)
+    fig_rutas2=px.bar(
+        df_top10_rutas,
+        x='CANTIDAD',
+        y='RUTA',
+        title='Top 10 de rutas con mayor número de operaciones',
+        color='CANTIDAD',
+        color_continuous_scale='tealgrn'
+    )
+    fig_rutas2.update_layout(showlegend=False) 
+    st.plotly_chart(fig_rutas,use_container_width=True)
