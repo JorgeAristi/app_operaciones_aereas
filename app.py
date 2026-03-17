@@ -117,7 +117,7 @@ with st.container(border=True):
         fig_rutas.update_layout(showlegend=False) 
         st.plotly_chart(fig_rutas,use_container_width=True)
 
-tab1,tab2=st.tabs(['DATOS','GRÁFICA DE BARRAS'])
+tab1,tab2=st.tabs([' 🧾 DATOS','  📊 GRÁFICA DE BARRAS'])
 
 with tab1:
     st.dataframe(df_top10_rutas)
@@ -133,4 +133,3 @@ with tab2:
     )
     fig_rutas2.update_layout(showlegend=False) 
     st.plotly_chart(fig_rutas2,use_container_width=True,key='rutas_tab2')
-
