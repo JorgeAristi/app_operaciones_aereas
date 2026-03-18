@@ -63,9 +63,9 @@ st.image('encabezado.png',use_container_width=True)
 with st.container(border=True):
     col1, col2, col3=st.columns(3)
     with col1:
-        st.metric('Máximo', f'{maximo:.0f}',border=True)
+        st.metric('MÁXIMO', f'{maximo:.0f}',border=True)
     with col2:
-        st.metric('Mínimo', f'{minimo:.0f}',border=True)  
+        st.metric('Mínimo', f'{minimo:.0f}',border=True) 
     with col3:
         st.metric('Media', f'{media:.0f}',border=True)
 
